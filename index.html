@@ -170,15 +170,15 @@ const PCT={
 const DAYS=[
  {d:'Tuesday', t:'Squat Day', sub:'Lower Body A', lift:'squat', acc:[
    ['Leg Press',4,'10'],['Romanian Deadlift',3,'10'],['Walking Lunge',3,'12 / leg'],
-   ['Standing Calf Raise',4,'15'],['Cable Crunch or Ab Wheel',3,'15']]},
+   ['Standing Calf Raise',4,'15'],['Hollow Body Hold',3,'30 sec']]},
  {d:'Wednesday', t:'Trap Bar Deadlift Day', sub:'Lower Body B', lift:'tbdl', acc:[
-   ['Bulgarian Split Squat',3,'10 / leg'],['Lying or Seated Leg Curl',3,'12'],
+   ['GHD Glute-Ham Raise',3,'8'],
    ['Seated Cable Row',4,'10'],['Seated Calf Raise',4,'15'],["Farmer's Carry",3,'40 yd']]},
  {d:'Thursday', t:'Incline Bench Day', sub:'Upper Body A — Push / Arms', lift:'inc', acc:[
    ['Flat Dumbbell Bench Press',3,'10'],['Lat Pulldown',4,'10'],
    ['Close-Grip Bench Press or Skullcrusher',3,'10'],['Barbell or EZ-Bar Curl',4,'10'],['Wrist Curl',3,'15']]},
  {d:'Friday', t:'Overhead Press Day', sub:'Upper Body B — Shoulders / Arms', lift:'ohp', acc:[
-   ['Seated DB Shoulder Press or Lateral Raise',3,'12'],['Chest-Supported Row or T-Bar Row',4,'10'],
+   ['Seated DB Shoulder Press or Lateral Raise',3,'12'],['Single-Arm Dumbbell Row',4,'10 / arm'],
    ['Tricep Pushdown',3,'12'],['Hammer Curl',4,'10'],['Reverse Barbell Curl or Plate Pinch Hold',3,'12 / 30 sec']]}
 ];
 /* seed: the one session already logged in the spreadsheet (Wk1 Thursday) */
@@ -213,10 +213,10 @@ function weekBar(){
  }
  document.getElementById('cyc').textContent='Week '+W+' · Cycle '+cycleOf(W)+' · '+PCT[wicOf(W)].lab;
 }
-function inp(key,cls,ph){
+function inp(key,cls,ph,mode){
  const v=g(key,'');
  const i=document.createElement('input');
- i.type='text'; i.inputMode='decimal'; i.value=v; i.placeholder=ph||'';
+ i.type='text'; i.inputMode=mode||'decimal'; i.value=v; i.placeholder=ph||'';
  i.className=cls+(v!==''?' filled':'');
  i.oninput=()=>{set(key,i.value.trim());i.classList.toggle('filled',i.value.trim()!=='');};
  return i;
@@ -276,7 +276,7 @@ function logView(){
   mt.appendChild(slot('Bodyweight','','w'+W+'-'+di+'-bw','','lb'));
   body.appendChild(mt);
   const nt=document.createElement('div'); nt.className='notes';
-  const ni=inp('w'+W+'-'+di+'-note','','Session notes…'); nt.appendChild(ni);
+  const ni=inp('w'+W+'-'+di+'-note','','Session notes…','text'); nt.appendChild(ni);
   body.appendChild(nt);
   v.appendChild(card);
  });
